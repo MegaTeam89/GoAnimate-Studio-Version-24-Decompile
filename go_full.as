@@ -53,7 +53,7 @@ package
    public class go_full extends Application implements IBindingClient
    {
       
-      private static var _watcherSetupUtil:IWatcherSetupUtil2;
+      private static var _watcherSetupUtil:IWatcherSetupUtil2; //allowed domains
       
       {
          Security.allowDomain("staging-cdn.org","godevstorage.s3.amazonaws.com","*.amazonaws.com","*.s3.amazonaws.com","*.goanimate.org","*.goanimate.com","goanimate.com","demo.cdn.goanimate.com","demo.goanimate.com","es.goanimate.com","fr.goanimate.com","de.goanimate.com","br.goanimate.com","tooncreator.cartoonnetworkhq.com","prelaunch.tooncreator.cartoonnetworkhq.com","staging.goanimate.org","staging.goanimate.com","cn.goanimate.com","goanimate.cartoonnetworkhq.org","lightspeed.goanimate.com","staging.school.goanimate.org","*.goanimate4schools.com","goanimate4schools.com","lightspeed.goanimate4schools.com","staging-school-cdn.com","lightspeed.youtube.goanimate.com","youtube.goanimate.org","youtube.goanimate.com","demo.youtube.goanimate.com","demo.cdn.youtube.goanimate.com","skoletube.goanimate.org","skoletube.goanimate.com","lightspeed.edplatform.goanimate.com","edplatform.goanimate.com","edplatform.goanimate.org","sandbox.edplatform.goanimate.com","sandbox.edplatform.goanimate.org","sandbox.schoology.goanimate.com","schoology.goanimate4schools.com");
@@ -339,7 +339,7 @@ package
          }
       }
       
-      private function loadClientLocale() : void
+      private function loadClientLocale() : void //load localization
       {
          Util.loadClientLocale("go",this.onClientLocaleComplete);
       }
@@ -349,7 +349,7 @@ package
          this.loadClientTheme();
       }
       
-      private function loadClientTheme() : void
+      private function loadClientTheme() : void //load theme color
       {
          var _loc1_:UtilHashArray = Util.getFlashVar();
          var _loc2_:String = _loc1_.getValueByKey(ServerConstants.FLASHVAR_THEME_COLOR);
@@ -376,14 +376,14 @@ package
          this._console.boxMode = UtilLicense.isBoxEnvironment();
          this._mainStage.visible = this._thumbTray.visible = this._topButtonBar.visible = true;
          this.addEventListener(KeyboardEvent.KEY_UP,Console.getConsole().doKeyUp);
-         if(Util.getFlashVar().getValueByKey("siteId") == String(Global.BEN10))
+         if(Util.getFlashVar().getValueByKey("siteId") == String(Global.BEN10)) //Stuff for Ben 10
          {
             this._bFluidLayout = false;
             this._mainStage.currentState = "cn";
             this._topButtonBar.currentState = "cn";
             this._thumbTray.currentState = "cn";
          }
-         else if(Util.getFlashVar().getValueByKey("siteId") == String(Global.DOMO))
+         else if(Util.getFlashVar().getValueByKey("siteId") == String(Global.DOMO)) //Stuff for domo
          {
             this._bFluidLayout = false;
             this._mainStage.currentState = "domo";
@@ -392,8 +392,8 @@ package
          }
          else
          {
-            this._thumbTray.btnImport.visible = UtilLicense.isUploadRelatedButtonShouldBeShown() && UtilUser.loggedIn;
-            if(Util.getFlashVar().getValueByKey("siteId") == "11")
+            this._thumbTray.btnImport.visible = UtilLicense.isUploadRelatedButtonShouldBeShown() && UtilUser.loggedIn; //Allow import if conditions are met
+            if(Util.getFlashVar().getValueByKey("siteId") == "11") //Stuff for school
             {
                this._thumbTray.currentState = "school";
             }
@@ -416,7 +416,7 @@ package
       {
          var _loc1_:SharedObject = null;
          this.stage.quality = StageQuality.MEDIUM;
-         try
+         try //try to get quality; wrapped in try catch to avoid anything bad happening incase of the data not being present
          {
             _loc1_ = SharedObject.getLocal("studioPreferences");
             if(_loc1_.data.stageQuality != null)
@@ -439,7 +439,7 @@ package
          this._timeline.addEventListener(ResizeEvent.RESIZE,this.onStageResize);
       }
       
-      private function onStageResize(param1:Event = null) : void
+      private function onStageResize(param1:Event = null) : void //Sets dimensions on resize
       {
          var _loc2_:Number = stage.stageWidth;
          var _loc3_:Number = stage.stageHeight;
@@ -490,14 +490,14 @@ package
          }
       }
       
-      private function fullScreenHandler(param1:FullScreenEvent) : void
+      private function fullScreenHandler(param1:FullScreenEvent) : void //useless, assuming stub due to autogeneration
       {
          if(!param1.fullScreen)
          {
          }
       }
       
-      public function ___go_full_Application1_preinitialize(param1:FlexEvent) : void
+      public function ___go_full_Application1_preinitialize(param1:FlexEvent) : void //preinitialization; does client
       {
          this.loadClientLocale();
       }
@@ -512,12 +512,12 @@ package
          this.resetFrameRate();
       }
       
-      public function ___loadProgress_creationComplete(param1:FlexEvent) : void
+      public function ___loadProgress_creationComplete(param1:FlexEvent) : void //show load screen progress
       {
          this._loadProgress.label = UtilDict.toDisplay("go","loading");
       }
       
-      public function ___go_full_Button1_click(param1:MouseEvent) : void
+      public function ___go_full_Button1_click(param1:MouseEvent) : void //Full screen button
       {
          this.toggleFullScreen();
       }
@@ -750,7 +750,7 @@ package
             this._159139667_thumbTray = param1;
             if(this.hasEventListener("propertyChange"))
             {
-               this.dispatchEvent(PropertyChangeEvent.createUpdateEvent(this,"_thumbTray",_loc2_,param1));
+               this.dispatchEvent(PropertyChangeEvent.createUpdateEvent(this,"_thumbTray",_loc2_,param1)); //react to updates on menu
             }
          }
       }
